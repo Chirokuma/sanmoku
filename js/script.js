@@ -1,88 +1,70 @@
 // const A = document.querySelector('#A')
+// const B = document.querySelector('#B')
+// const C = document.querySelector('#C')
 
-let count = 0
-
-const masu = document.querySelectorAll('.board div');
-console.log(masu);
-
-masu[0].addEventListener('click', () => {
-    count++;
-    if (count % 2 !== 0) {
-        masu[0].textContent = '🐶';
-    } else {
-        masu[0].textContent = '🐱';
-    }
-})
+// let count = 0
 
 // A.addEventListener('click', () => {
 //     count++;
-//     if (count % 2 !== 0) {
-//         A.textContent = '🐶';
+//     // 奇数偶数の判定
+//     if (count%2===1){
+//         A.textContent = '🐶'
 //     } else {
-//         A.textContent = '🐱';
+//         A.textContent = '🐱'
 //     }
 // })
+
 // B.addEventListener('click', () => {
 //     count++;
-//     if (count % 2 !== 0) {
-//         B.textContent = '🐶';
+//     // 奇数偶数の判定
+//     if (count%2===1){
+//         B.textContent = '🐶'
 //     } else {
-//         B.textContent = '🐱';
+//         B.textContent = '🐱'
 //     }
 // })
+
 // C.addEventListener('click', () => {
 //     count++;
-//     if (count % 2 !== 0) {
-//         C.textContent = '🐶';
+//     // 奇数偶数の判定
+//     if (count%2===1){
+//         C.textContent = '🐶'
 //     } else {
-//         C.textContent = '🐱';
+//         C.textContent = '🐱'
 //     }
 // })
-// D.addEventListener('click', () => {
-//     count++;
-//     if (count % 2 !== 0) {
-//         D.textContent = '🐶';
-//     } else {
-//         D.textContent = '🐱';
-//     }
-// })
-// E.addEventListener('click', () => {
-//     count++;
-//     if (count % 2 !== 0) {
-//         E.textContent = '🐶';
-//     } else {
-//         E.textContent = '🐱';
-//     }
-// })
-// F.addEventListener('click', () => {
-//     count++;
-//     if (count % 2 !== 0) {
-//         F.textContent = '🐶';
-//     } else {
-//         F.textContent = '🐱';
-//     }
-// })
-// G.addEventListener('click', () => {
-//     count++;
-//     if (count % 2 !== 0) {
-//         G.textContent = '🐶';
-//     } else {
-//         G.textContent = '🐱';
-//     }
-// })
-// H.addEventListener('click', () => {
-//     count++;
-//     if (count % 2 !== 0) {
-//         H.textContent = '🐶';
-//     } else {
-//         H.textContent = '🐱';
-//     }
-// })
-// I.addEventListener('click', () => {
-//     count++;
-//     if (count % 2 !== 0) {
-//         I.textContent = '🐶';
-//     } else {
-//         I.textContent = '🐱';
-//     }
-// })
+
+// これは配列が入る
+const masu = document.querySelectorAll('.board div');
+console.log(masu);
+
+let count = 0
+
+for (let i = 0; i < 9; i++) {
+    masu[i].addEventListener('click', () => {
+        count++;
+
+        // 奇数偶数の判定
+        if (count % 2 === 1) {
+            masu[i].textContent = '🐶'
+            masu[i].classList.add('maru');
+        } else {
+            masu[i].textContent = '🐱'
+            masu[i].classList.add('batu');
+        }
+
+        if (masu[0].textContent === '🐶' &&
+            masu[1].textContent === '🐶' &&
+            masu[2].textContent === '🐶'
+        ){
+            console.log(masu[0].textContent)
+            console.log('🐶の勝ち！')
+        }
+    })
+}
+
+// イベントの外は読み込んだ瞬間に実行される
+// if (masu[0].textContent === '🐶'){
+//     console.log(masu[0].textContent)
+//     console.log('🐶の勝ち！')
+// }
