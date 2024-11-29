@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customized Osechi</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <div class="header-nav">
+        <ul class="nav">
+            <li><a href=" index.html">ホーム</a></li>
+            <li><a href="customizing2.html" class="">おせち作成</a></li>
+            <li><a href="omake.html" class="">おまけ</a></li>
+            <li class="last">
+                <span class="tel"><small>お問い合わせ</small>Tel.<i>0120-0000-0000</i></span>
+            </li>
+        </ul>
+    </div>
+
+
+    <style>
+        body {
+            background-image: url(images/haikei.jpg);
+        }
+
+        /* ドラッグ可能な画像のスタイル */
+        .dragItem {
+            width: 100px;
+            height: 100px;
+            cursor: grab;
+            margin: 10px;
+            text-align: center;
+            display: inline-block;
+            position: relative;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .dragItem img {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .dragItem:hover {
+            transform: scale(1.1);
+        }
+
+        /* ドロップエリア（重箱） */
+        #dropArea {
+            width: 450px;
+            height: 450px;
+            background-image: url('images/9masu1.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: relative;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        /* 削除ボタンのスタイル */
+        #deleteBtn {
+            position: absolute;
+            top: 400px;
+            right: 310px;
+            background-color: red;
+            color: white;
+            border: 3px solid white;
+            padding: 12px 20px;
+            font-size: 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        #deleteBtn:hover {
+            background-color: white;
+            border: 3px solid red;
+            color: red;
+        }
+
+        /* ドロップした画像のスタイル */
+        .droppedImage {
+            cursor: grab;
+        }
+
+        .selected {
+            border: 3px solid red;
+        }
+
+        .osouzai {
+            ;
+
+        }
+
+        /* 300円と500円のデザイン */
+        .priceLabel {
+            background-color: black;
+            color: white;
+            border: 3px solid white;
+            padding: 12px 20px;
+            margin-top: 50px;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            text-align: left;
+            /* 左揃え */
+        }
+
+        .price300Container,
+        .price500Container {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ドロップエリア（重箱） -->
+    <div id="dropArea"></div>
+
+    <!-- 削除ボタン -->
+    <button id="deleteBtn">削除</button>
+
+    <div class="osouzai">
+        <!-- 300円 -->
+        <div class="priceLabel">300円</div>
+        <div class="price300Container">
+            <div class="dragItem" id="mame" draggable="true">
+                <img src="images/mame.jpg" alt="豆">
+                <div>黒豆</div>
+            </div>
+            <div class="dragItem" id="tatsukuri" draggable="true">
+                <img src="images/tatsukuri.jpg" alt="田作り">
+                <div>田作り</div>
+            </div>
+            <div class="dragItem" id="kamaboko" draggable="true">
+                <img src="images/kamaboko.jpg" alt="かまぼこ">
+                <div>かまぼこ</div>
+            </div>
+            <div class="dragItem" id="nanika" draggable="true">
+                <img src="images/nanika.jpg" alt="なにか">
+                <div>なにか</div>
+            </div>
+            <div class="dragItem" id="wagashi2" draggable="true">
+                <img src="images/wagashi.jpg" alt="和菓子">
+                <div>和菓子</div>
+            </div>
+        </div>
+
+        <!-- 500円 -->
+        <div class="priceLabel">500円</div>
+        <div class="price500Container">
+            <div class="dragItem" id="nanika2" draggable="true">
+                <img src="images/nanika2.jpg" alt="なにか2">
+                <div>なにか2</div>
+            </div>
+            <div class="dragItem" id="daikonmaki" draggable="true">
+                <img src="images/daikonmaki.jpg" alt="大根巻">
+                <div>大根巻</div>
+            </div>
+            <div class="dragItem" id="ebi" draggable="true">
+                <img src="images/ebi.jpg" alt="エビ">
+                <div>海老</div>
+            </div>
+            <div class="dragItem" id="wagashi" draggable="true">
+                <img src="images/buri.jpg" alt="ブリ">
+                <div>ブリ</div>
+            </div>
+            <div class="dragItem" id="niku" draggable="true">
+                <img src="images/oniku.jpg" alt="お肉">
+                <div>肉</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dragItems = document.querySelectorAll('.dragItem');
+        const dropArea = document.getElementById('dropArea');
+        const deleteBtn = document.getElementById('deleteBtn');
+        let selectedImage = null;
+
+        // 各ドラッグアイテムにドラッグイベントを設定
+        dragItems.forEach(item => {
+            item.addEventListener('dragstart', (event) => {
+                event.target.style.opacity = '0.5';
+                event.dataTransfer.setData('text', event.target.id);
+            });
+            item.addEventListener('dragend', (event) => {
+                event.target.style.opacity = '1';
+            });
+        });
+
+        // ドロップエリアにドロップを許可
+        dropArea.addEventListener('dragover', (event) => {
+            event.preventDefault();
+        });
+
+        // アイテムをドロップした時
+        dropArea.addEventListener('drop', (event) => {
+            event.preventDefault();
+            const data = event.dataTransfer.getData('text');
+            const droppedItem = document.getElementById(data);
+
+            // ドロップエリア内に画像を配置
+            if (droppedItem && !droppedItem.classList.contains('droppedImage')) {
+                const rect = dropArea.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                // グリッドのセルに合わせた位置に配置
+                const gridX = Math.floor(x / (rect.width / 3)); // 3列
+                const gridY = Math.floor(y / (rect.height / 3)); // 3行
+
+                // ドロップした画像をドロップ位置に配置
+                droppedItem.classList.add('droppedImage');
+                droppedItem.style.gridColumnStart = gridX + 1;
+                droppedItem.style.gridRowStart = gridY + 1;
+
+                // ドロップした画像を選択可能に
+                droppedItem.addEventListener('click', () => {
+                    if (selectedImage) {
+                        selectedImage.classList.remove('selected');
+                    }
+                    selectedImage = droppedItem;
+                    selectedImage.classList.add('selected');
+                });
+            }
+        });
+
+        // 削除ボタンの処理
+        deleteBtn.addEventListener('click', () => {
+            if (selectedImage) {
+                selectedImage.remove();
+                selectedImage = null;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

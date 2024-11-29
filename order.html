@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <link rel="stylesheet" href="css/style.css">
+
+    <div class="header-nav">
+        <ul class="nav">
+            <li><a href=" index.html">ホーム</a></li>
+            <li><a href="customizing2.html" class="">おせち作成</a></li>
+            <li><a href="omake.html" class="">おまけ</a></li>
+            <li class="last">
+                <span class="tel"><small>お問い合わせ</small>Tel.<i>0120-0000-0000</i></span>
+            </li>
+        </ul>
+    </div>
+
+</head>
+<body>
+
+    <div id="app">
+        <form>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>郵便番号</th>
+                        <td>
+                            <input id="input" class="zipcode" type="text" name="zipcode" value="" placeholder="例)8120012">
+                            <button id="search" type="button">住所検索</button>
+                            <p id="error"></p>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <th>都道府県</th>
+                        <td><input id="address1" type="text" name="address1" value=""></td>
+                    </tr>
+    
+                    <tr>
+                        <th>市区町村</th>
+                        <td><input id="address2" type="text" name="address2" value=""></td>
+                    </tr>
+    
+                    <tr>
+                        <th>町域・番地</th>
+                        <td><input id="address3" type="text" name="address3" value=""></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    
+</body>
+</html>
