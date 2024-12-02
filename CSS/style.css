@@ -1,0 +1,222 @@
+@charset "utf-8";
+
+/* 基本レイアウト */
+@import url(common.css);
+@media screen and (max-width: 480px) {
+
+    header,
+    nav,
+    #graphic,
+    #contents,
+    footer {
+        margin: 0 auto;
+        width: 95%;
+    }
+}
+
+body {
+    background-image: url(images/haikei.jpg);
+}
+
+#indexbody {
+    background-image: url(images/kanseizu.jpg);
+}
+
+.header-nav {
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* ドラッグ可能な画像 */
+dragItem {
+    width: 100px;
+    height: 100px;
+    cursor: grab;
+    margin: 10px;
+    text-align: center;
+    display: flex;
+    position: relative;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+dragItem img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.dragItem:hover {
+    transform: scale(1.1);
+}
+
+/* ドロップエリア（重箱） */
+#dropArea {
+    width: 450px;
+    height: 450px;
+    background-image: url('images/9masu1.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2px;
+}
+
+/* 削除ボタンのスタイル */
+#deleteBtn {
+    position: absolute;
+    top: 400px;
+    right: 310px;
+    background-color: red;
+    color: white;
+    border: 3px solid white;
+    padding: 12px 20px;
+    font-size: 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+#deleteBtn:hover {
+    background-color: white;
+    border: 3px solid red;
+    color: red;
+}
+
+/* ドロップした画像のスタイル */
+.droppedImage {
+    cursor: grab;
+}
+
+.selected {
+    border: 3px solid red;
+}
+
+.osouzai {
+    ;
+}
+
+/* 300円と500円のデザイン */
+.priceLabel {
+    background-color: black;
+    color: white;
+    border: 3px solid white;
+    padding: 12px 20px;
+    margin-top: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-align: left;
+    /* 左揃え */
+}
+
+.price300Container,
+.price500Container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+------------------------------
+/* #draggable {
+    width: 100px;
+    height: 100px;
+    background-color: lightblue;
+    cursor: grab;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#droppable {
+    width: 200px;
+    height: 200px;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+#app {
+    width: 96%;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    padding: 28px;
+    line-height: 1.5;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    background-color: transparent;
+    box-shadow: 2px 2px 5px 0px rgba(200, 200, 200, 1);
+    font-family: "Times New Roman";
+}
+
+#error {
+    margin: 5px 0 0 0;
+    color: #ff0000;
+    font-size: .84rem;
+    font-weight: bold;
+}
+
+table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+
+    tbody {
+        tr {
+            th {
+                width: 80px;
+                padding: 20px 10px;
+                text-align: left;
+                border-bottom: 2px solid #384878;
+            }
+
+            td {
+                width: calc(100% - 80px);
+                padding: 20px 10px;
+                border-bottom: 2px solid #cccccc;
+
+                input {
+                    padding: 5px;
+                    border: 0;
+                    border: 1px solid #cccccc;
+                }
+
+                button {
+                    padding: 3px 10px;
+                    color: #ffffff;
+                    background-color: #00c2bc;
+                    border: 0;
+                    box-shadow: none;
+                    cursor: pointer;
+                }
+
+                .zipcode {
+                    width: 75px;
+                }
+            }
+        }
+    }
+}
