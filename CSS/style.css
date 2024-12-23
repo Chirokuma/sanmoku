@@ -1,3 +1,6 @@
+/*=============================================
+ * 共通
+ *=============================================*/
 @charset "utf-8";
 @media screen and (max-width: 480px) {
 
@@ -9,12 +12,14 @@
     }
 }
 
-body {
-    font-family: 'Kiwi Maru', serif;
-    font-size: 20px;
+/* 見え方をデバイスに合わせる */
+.responsive-image {
+    /* 親要素の幅に合わせて画像を縮小 */
+    max-width: 100%;
+    /* アスペクト比を保ちながら高さを自動調整 */
+    height: auto;
 }
 
-/* ヘッダーの黒い帯 */
 #header {
     background-color: black;
     padding: 10px 0;
@@ -24,10 +29,11 @@ body {
 }
 
 h1 a {
+    color: white;
+    font-size: 50px;
     text-decoration: none;
     justify-content: left;
-    padding-left: 20px;
-    color: white;
+    padding-left: 30px;
     transition: color 0.3s ease;
     /* ホバー時の色変更をスムーズに */
 }
@@ -36,42 +42,188 @@ h1 a:hover {
     color: #FFD700;
 }
 
+.menu {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 30px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.menu a:hover {
+    color: #FFD700;
+}
+
+body {
+    font-family: 'Kiwi Maru', serif;
+    font-size: 20px;
+}
+
+/* 花びらが降るアニメーション */
+@keyframes animate-petal {
+    0% {
+        top: 0;
+        opacity: 0;
+        transform: rotate(0deg);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        top: 100vh;
+        transform: rotate(3000deg);
+    }
+}
+
+/* 桜を表示するコンテナのスタイル */
+.cherry-blossom-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    /* コンテナからはみ出した要素を隠す */
+    overflow: hidden;
+}
+
+/* 桜の花びらのスタイル */
+.petal {
+    position: absolute;
+        /* 花びらの色 */
+    background-color: #ffc0cb;
+    border-radius: 150% 0 150% 0;
+    animation: animate-petal 10s linear;
+}
+
+.petal::after {
+    content: "";
+    position: absolute;
+    top: -14%;
+    left: -10%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #ffc0cb;
+    border-radius: 150% 0 150% 0;
+    transform: rotate(15deg);
+}
+
+/*=============================================
+ * index.html
+ *=============================================*/
+#top-page {
+    background-image: url(images/indexhaikei.jpg);
+}
+
+#topphoto {
+    width: 65%;
+    max-width: 550px;
+    height: auto;
+    display: block;
+    margin: 200px auto auto;
+    /* 左右自動設定、中央揃え */
+}
+
+.topp {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.sakusei_button {
+    font-family: "Noto Serif JP", serif;
+    font-size: 26px;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.75em 2em;
+    color: #0a0a0a;
+    background-color: #e6b422;
+    border: 2px solid #f8f7f2;
+    display: inline-block;
+    border-radius: 0.3em;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    margin: 100px 33% 100px 33%;
+}
+
+.sakusei_button:before {
+    content: "";
+    background-color: #ebd6ad;
+    height: 100%;
+    width: 3em;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -4.5em;
+    transform: skewX(-45deg) translateX(0);
+    transition: none;
+}
+
+.sakusei_button:hover {
+    color: #fff;
+    transition: all 0.5s;
+    transform: translate(0, 0.4em);
+    box-shadow: 0 0 0 0 #fff;
+    /* animation: sheen 0.5s ease-in-out forwards; */
+}
+
+.sakusei_button:hover:before {
+    transform: skewX(-45deg) translateX(13.5em);
+    transition: all 0.3s ease-in-out;
+}
+
+
+/*=============================================
+ * customizing.html
+ *=============================================*/
+ 
+#custom-page {
+    background-image: url('images/haikei.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+}
+
 /* ドロップエリア（重箱） */
 #dropArea {
     width: 600px;
-        height: 600px;
+    height: 600px;
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
-        margin: 300px auto 100px auto;
+    margin: 300px auto 100px auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 3px;
 }
 
-
-/* 各マスのスタイル */
+/* 重箱各マスのスタイル */
 .dropCell {
-    width: 33.33%;
     /* 重箱の3分の1の幅 */
-    height: 33.33%;
+    width: 33.33%;
     /* 重箱の3分の1の高さ */
+    height: 33.33%;
     position: absolute;
     box-sizing: border-box;
-    border: 10px solid transparent; /* 透明の仕切り */
+    /* 透明の仕切り */
+    border: 10px solid transparent;
 }
 
-/* ドロップされた画像のスタイル */
-.droppedImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    cursor: grab;
-    border-radius: 15px;
-}
-
-/* 各マスの位置を調整 */
+/* 重箱各マスの位置調整 */
 #cell1 {
     top: 0;
     left: 0;
@@ -117,51 +269,6 @@ h1 a:hover {
     right: 0;
 }
 
-
-
-/* メニューのスタイル */
-.menu {
-    display: flex;
-    justify-content: flex-end;
-    /* 右端に配置 */
-    padding-right: 30px;
-}
-
-.menu a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 18px;
-    transition: color 0.3s ease;
-}
-
-.menu a:hover {
-    color: #FFD700;
-    /* ホバー時に金色に変化 */
-}
-
-.top-page {
-    background-image: url(images/indexhaikei.jpg);
-}
-
-#topphoto {
-    width: 65%;
-    max-width: 550px;
-    height: auto;
-    display: block;
-    margin: 200px auto auto;
-    /* 左右自動設定、中央揃え */
-}
-
-.topp {
-    font-family: 'Kiwi Maru', serif;
-    font-size: 24px;
-    color: #333;
-    text-align: center;
-}
-
-
-/* ドラッグ可能な画像のスタイル */
 .dragItem {
     width: 100px;
     height: 100px;
@@ -171,16 +278,15 @@ h1 a:hover {
     display: inline-block;
     position: relative;
     border: 2px solid #ccc;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
-
 .dragItem img {
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    border-radius: 10px;
     object-fit: cover;
 }
 
@@ -188,23 +294,23 @@ h1 a:hover {
     transform: scale(1.1);
 }
 
-
-
-.responsive-image {
-    max-width: 100%;
-    /* 親要素の幅に合わせて画像を縮小 */
-    height: auto;
-    /* アスペクト比を保ちながら高さを自動調整 */
+/* dragItemドロップされた後のスタイル */
+.droppedImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: grab;
+    border-radius: 15px;
 }
 
 /* 削除ボタンのスタイル */
 #deleteBtn {
     position: absolute;
-    top: 400px;
-    right: 310px;
-    background-color: red;
-    color: white;
-    border: 3px solid white;
+    top: 800px;
+    right: 20%;
+    background-color: white;
+    color: red;
+    border: 3px solid red;
     padding: 12px 20px;
     font-size: 25px;
     border-radius: 10px;
@@ -214,46 +320,53 @@ h1 a:hover {
 }
 
 #deleteBtn:hover {
-    background-color: white;
-    border: 3px solid red;
-    color: red;
+    background-color: red;
+    border: 3px solid white;
+    color: white;
 }
 
-.selected {
-    border: 3px solid white;
+.price_zentai {
+    justify-content: center;
+}
+
+
+.area500 {
+    margin-top: 40px;
 }
 
 .price300Container,
 .price500Container {
-    gap: 15px;
     margin-top: 20px;
 }
 
 /* 300円と500円のデザイン */
 .priceLabel {
-    background: linear-gradient(transparent 50%, #b7b9b9 50%);
-    padding: 12px 20px;
-    margin-top: 50px;
-    font-size: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-    display: inline-block;
-    text-align: left;
-    /* 左揃え */
+    display: flex;
+    color: #333333;
+    font-size: 30px;
+}
+
+.priceLabel::before,
+.priceLabel::after {
+    width: 3px;
+    height: 40px;
+    background-color: #2589d0;
+    content: '';
+}
+
+.priceLabel::before {
+    transform: rotate(-35deg);
+    margin-right: 30px;
+}
+
+.priceLabel::after {
+    transform: rotate(35deg);
+    margin-left: 30px;
 }
 
 
 
-
-
-
-.custom-page {
-    background-image: url(images/haikei.jpg);
-}
-
-/* おせち作成ボタンのキランッ */
+/* 
 @-webkit-keyframes sheen {
     0% {
         transform: skewY(-45deg) translateX(0);
@@ -272,57 +385,8 @@ h1 a:hover {
     100% {
         transform: skewY(-45deg) translateX(12.5em);
     }
-}
+} */
 
-.button {
-    padding: 0.75em 2em;
-    text-align: center;
-    text-decoration: none;
-    color: #0a0a0a;
-    background-color: #e6b422;
-    border: 2px solid #f8f7f2;
-    font-family: "Noto Serif JP", serif;
-    font-size: 24px;
-    display: inline-block;
-    border-radius: 0.3em;
-    transition: all 0.2s ease-in-out;
-    position: relative;
-    overflow: hidden;
-    margin: 100px 33% 100px 33%;
-}
-
-.button:before {
-    content: "";
-    background-color: #ebd6ad;
-    height: 100%;
-    width: 3em;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: -4.5em;
-    transform: skewX(-45deg) translateX(0);
-    transition: none;
-}
-
-.button:hover {
-    background-color: #e6b422;
-    color: #fff;
-    border-bottom: 4px solid #606842;
-    /* animation: sheen 0.5s ease-in-out forwards; */
-}
-
-.button:hover:before {
-    transform: skewX(-45deg) translateX(13.5em);
-    transition: all 0.3s ease-in-out;
-}
-
-.custom-page {
-    background-image: url('images/haikei.jpg');
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-    padding: 0;
-}
 
 
 .largeImage {
@@ -353,6 +417,9 @@ h1 a:hover {
         box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
     }
 }
+
+
+
 
 /* メッセージのスタイル */
 .message {

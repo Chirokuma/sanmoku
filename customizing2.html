@@ -21,82 +21,83 @@
     </div>
 </header>
 
+<body id="custom-page">
+    <div id="dropArea">
+        <img src="images/9masu1.jpg" alt="重箱" style="width: 600px; height: auto;" />
+        <!-- 重箱各マス -->
+        <div class="dropCell" id="cell1"></div>
+        <div class="dropCell" id="cell2"></div>
+        <div class="dropCell" id="cell3"></div>
+        <div class="dropCell" id="cell4"></div>
+        <div class="dropCell" id="cell5"></div>
+        <div class="dropCell" id="cell6"></div>
+        <div class="dropCell" id="cell7"></div>
+        <div class="dropCell" id="cell8"></div>
+        <div class="dropCell" id="cell9"></div>
+    </div>
 
-<div id="dropArea">
-
-
-    <img src="images/9masu1.jpg" alt="重箱" style="width: 600px; height: auto;" />
-    <!-- 9つのドロップセル（マス） -->
-    <div class="dropCell" id="cell1"></div>
-    <div class="dropCell" id="cell2"></div>
-    <div class="dropCell" id="cell3"></div>
-    <div class="dropCell" id="cell4"></div>
-    <div class="dropCell" id="cell5"></div>
-    <div class="dropCell" id="cell6"></div>
-    <div class="dropCell" id="cell7"></div>
-    <div class="dropCell" id="cell8"></div>
-    <div class="dropCell" id="cell9"></div>
-</div>
-
-<button id="deleteBtn">削除</button>
-
-<div class="osouzai">
+    <button id="deleteBtn">削除</button>
     <br>
 
     <!-- 300円 -->
-    <div class="priceLabel">300円</div>
-    <div class="price300Container">
-        <div class="dragItem" id="mame" draggable="true">
-            <img src="images/mame.jpg" alt="豆">
-            <div>黒豆</div>
+    <div class="price_zentai">
+        <div class="area300">
+            <div class="priceLabel">300円</div>
+            <div class="price300Container">
+                <div class="dragItem" id="mame" draggable="true">
+                    <img src="images/mame.jpg" alt="豆">
+                    <div>黒豆</div>
+                </div>
+                <div class="dragItem" id="tatsukuri" draggable="true">
+                    <img src="images/tatsukuri.jpg" alt="田作り">
+                    <div>田作り</div>
+                </div>
+                <div class="dragItem" id="kamaboko" draggable="true">
+                    <img src="images/kamaboko.jpg" alt="かまぼこ">
+                    <div>かまぼこ</div>
+                </div>
+                <div class="dragItem" id="nanika" draggable="true">
+                    <img src="images/nanika.jpg" alt="なにか">
+                    <div>なにか</div>
+                </div>
+                <div class="dragItem" id="wagashi2" draggable="true">
+                    <img src="images/wagashi.jpg" alt="和菓子">
+                    <div>和菓子</div>
+                </div>
+            </div>
         </div>
-        <div class="dragItem" id="tatsukuri" draggable="true">
-            <img src="images/tatsukuri.jpg" alt="田作り">
-            <div>田作り</div>
-        </div>
-        <div class="dragItem" id="kamaboko" draggable="true">
-            <img src="images/kamaboko.jpg" alt="かまぼこ">
-            <div>かまぼこ</div>
-        </div>
-        <div class="dragItem" id="nanika" draggable="true">
-            <img src="images/nanika.jpg" alt="なにか">
-            <div>なにか</div>
-        </div>
-        <div class="dragItem" id="wagashi2" draggable="true">
-            <img src="images/wagashi.jpg" alt="和菓子">
-            <div>和菓子</div>
+        <br>
+
+        <!-- 500円 -->
+        <div class="area500">
+
+            <div class="priceLabel">500円</div>
+            <div class="price500Container">
+                <div class="dragItem" id="nanika2" draggable="true">
+                    <img src="images/nanika2.jpg" alt="なにか2">
+                    <div>なにか2</div>
+                </div>
+                <div class="dragItem" id="daikonmaki" draggable="true">
+                    <img src="images/daikonmaki.jpg" alt="大根巻">
+                    <div>大根巻</div>
+                </div>
+                <div class="dragItem" id="ebi" draggable="true">
+                    <img src="images/ebi.jpg" alt="エビ">
+                    <div>海老</div>
+                </div>
+                <div class="dragItem" id="wagashi" draggable="true">
+                    <img src="images/buri.jpg" alt="ブリ">
+                    <div>ブリ</div>
+                </div>
+                <div class="dragItem" id="niku" draggable="true">
+                    <img src="images/oniku.jpg" alt="お肉">
+                    <div>肉</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <br>
-
-    <!-- 500円 -->
-    <div class="priceLabel">500円</div>
-    <div class="price500Container">
-        <div class="dragItem" id="nanika2" draggable="true">
-            <img src="images/nanika2.jpg" alt="なにか2">
-            <div>なにか2</div>
-        </div>
-        <div class="dragItem" id="daikonmaki" draggable="true">
-            <img src="images/daikonmaki.jpg" alt="大根巻">
-            <div>大根巻</div>
-        </div>
-        <div class="dragItem" id="ebi" draggable="true">
-            <img src="images/ebi.jpg" alt="エビ">
-            <div>海老</div>
-        </div>
-        <div class="dragItem" id="wagashi" draggable="true">
-            <img src="images/buri.jpg" alt="ブリ">
-            <div>ブリ</div>
-        </div>
-        <div class="dragItem" id="niku" draggable="true">
-            <img src="images/oniku.jpg" alt="お肉">
-            <div>肉</div>
-        </div>
-    </div>
-</div>
-
-<script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
