@@ -30,7 +30,7 @@
 
 h1 a {
     color: white;
-    font-size: 50px;
+    font-size: 3rem;
     text-decoration: none;
     justify-content: left;
     padding-left: 30px;
@@ -45,14 +45,14 @@ h1 a:hover {
 .menu {
     display: flex;
     justify-content: flex-end;
-    padding-right: 30px;
+    padding-right: 5%;
 }
 
 .menu a {
     color: white;
+    font-size: 1.2rem;
     text-decoration: none;
     margin-left: 20px;
-    font-size: 20px;
     transition: color 0.3s ease;
 }
 
@@ -62,7 +62,9 @@ h1 a:hover {
 
 body {
     font-family: 'Kiwi Maru', serif;
-    font-size: 20px;
+    font-size: 1rem;
+    overflow: hidden;
+    /* スクロールバーを表示させない */
 }
 
 /* 花びらが降るアニメーション */
@@ -100,7 +102,7 @@ body {
 /* 桜の花びらのスタイル */
 .petal {
     position: absolute;
-        /* 花びらの色 */
+    /* 花びらの色 */
     background-color: #ffc0cb;
     border-radius: 150% 0 150% 0;
     animation: animate-petal 10s linear;
@@ -123,15 +125,23 @@ body {
  * index.html
  *=============================================*/
 #top-page {
-    background-image: url(images/indexhaikei.jpg);
-}
+    background-image: url('images/indexhaikei.jpg');
+        background-size: cover;
+        /* 背景画像を画面いっぱいに表示 */
+        background-position: center;
+        /* 画像を中央に配置 */
+        height: 100vh;
+        /* 画面全体の高さを確保 */
+        width: 100%;
+        /* 幅も100% */
+    }
 
 #topphoto {
-    width: 65%;
-    max-width: 550px;
+    width: 40%;
+    max-width: 60%;
     height: auto;
     display: block;
-    margin: 200px auto auto;
+    margin: 400px auto auto;
     /* 左右自動設定、中央揃え */
 }
 
@@ -143,10 +153,11 @@ body {
 
 .sakusei_button {
     font-family: "Noto Serif JP", serif;
-    font-size: 26px;
+    font-size: 2rem;
     text-align: center;
     text-decoration: none;
-    padding: 0.75em 2em;
+    max-width: %;
+    padding: 1em 3em;
     color: #0a0a0a;
     background-color: #e6b422;
     border: 2px solid #f8f7f2;
@@ -155,7 +166,7 @@ body {
     transition: all 0.2s ease-in-out;
     position: relative;
     overflow: hidden;
-    margin: 100px 33% 100px 33%;
+    margin: 10% auto;
 }
 
 .sakusei_button:before {
@@ -165,7 +176,7 @@ body {
     width: 3em;
     display: block;
     position: absolute;
-    top: 0;
+    margin-top: 100px;
     left: -4.5em;
     transform: skewX(-45deg) translateX(0);
     transition: none;
@@ -173,6 +184,7 @@ body {
 
 .sakusei_button:hover {
     color: #fff;
+    font-size: 2rem;
     transition: all 0.5s;
     transform: translate(0, 0.4em);
     box-shadow: 0 0 0 0 #fff;
@@ -188,185 +200,211 @@ body {
 /*=============================================
  * customizing.html
  *=============================================*/
- 
+
 #custom-page {
     background-image: url('images/haikei.jpg');
-    background-size: cover;
-    background-position: center;
+
+    /* background-size: cover;
+    background-position: center; */
+    /* justify-content: center;
     margin: 0;
-    padding: 0;
+    padding: 0;*/
 }
 
-/* ドロップエリア（重箱） */
-#dropArea {
-    width: 600px;
-    height: 600px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: relative;
-    margin: 300px auto 100px auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 3px;
-}
+    /* ドロップエリア（重箱） */
+    #dropArea {
+        width: 600px;
+        height: 600px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: relative;
+        margin: 300px auto 100px auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 3px;
+    }
 
-/* 重箱各マスのスタイル */
-.dropCell {
-    /* 重箱の3分の1の幅 */
-    width: 33.33%;
-    /* 重箱の3分の1の高さ */
-    height: 33.33%;
-    position: absolute;
-    box-sizing: border-box;
-    /* 透明の仕切り */
-    border: 10px solid transparent;
-}
+    .customzentai {
+        position: absolute;
+        text-align: center
+    }
 
-/* 重箱各マスの位置調整 */
-#cell1 {
-    top: 0;
-    left: 0;
-}
+    /* 重箱各マスのスタイル */
+    .dropCell {
+        /* 重箱の3分の1の幅 */
+        width: 33.33%;
+        /* 重箱の3分の1の高さ */
+        height: 33.33%;
+        position: absolute;
+        box-sizing: border-box;
+        /* 透明の仕切り */
+        border: 10px solid transparent;
+    }
 
-#cell2 {
-    top: 0;
-    left: 33.33%;
-}
+    /* 重箱各マスの位置調整 */
+    #cell1 {
+        top: 0;
+        left: 0;
+    }
 
-#cell3 {
-    top: 0;
-    right: 0;
-}
+    #cell2 {
+        top: 0;
+        left: 33.33%;
+    }
 
-#cell4 {
-    top: 33.33%;
-    left: 0;
-}
+    #cell3 {
+        top: 0;
+        right: 0;
+    }
 
-#cell5 {
-    top: 33.33%;
-    left: 33.33%;
-}
+    #cell4 {
+        top: 33.33%;
+        left: 0;
+    }
 
-#cell6 {
-    top: 33.33%;
-    right: 0;
-}
+    #cell5 {
+        top: 33.33%;
+        left: 33.33%;
+    }
 
-#cell7 {
-    bottom: 0;
-    left: 0;
-}
+    #cell6 {
+        top: 33.33%;
+        right: 0;
+    }
 
-#cell8 {
-    bottom: 0;
-    left: 33.33%;
-}
+    #cell7 {
+        bottom: 0;
+        left: 0;
+    }
 
-#cell9 {
-    bottom: 0;
-    right: 0;
-}
+    #cell8 {
+        bottom: 0;
+        left: 33.33%;
+    }
 
-.dragItem {
-    width: 100px;
-    height: 100px;
-    cursor: grab;
-    margin: 10px;
-    text-align: center;
-    display: inline-block;
-    position: relative;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
+    #cell9 {
+        bottom: 0;
+        right: 0;
+    }
 
-.dragItem img {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    object-fit: cover;
-}
+    .dragItem {
+        width: 100px;
+        height: 100px;
+        cursor: grab;
+        margin: 10px;
+        text-align: center;
+        display: inline-block;
+        position: relative;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
 
-.dragItem:hover {
-    transform: scale(1.1);
-}
+    .dragItem img {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        object-fit: cover;
+    }
 
-/* dragItemドロップされた後のスタイル */
-.droppedImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    cursor: grab;
-    border-radius: 15px;
-}
+    .dragItem:hover {
+        transform: scale(1.1);
+    }
 
-/* 削除ボタンのスタイル */
-#deleteBtn {
-    position: absolute;
-    top: 800px;
-    right: 20%;
-    background-color: white;
-    color: red;
-    border: 3px solid red;
-    padding: 12px 20px;
-    font-size: 25px;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-}
+    /* dragItemドロップされた後のスタイル */
+    .droppedImage {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: grab;
+        border-radius: 15px;
+    }
 
-#deleteBtn:hover {
-    background-color: red;
-    border: 3px solid white;
-    color: white;
-}
+    /* 削除ボタンのスタイル */
+    #deleteBtn {
+        position: absolute;
+        top: 800px;
+        left: 20%;
+        background-color: rgb(199, 222, 243);
+        color: black;
+        border: 3px solid black;
+        padding: 12px 20px;
+        font-size: 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 8px 8px 0px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
 
-.price_zentai {
-    justify-content: center;
-}
+    #deleteBtn:hover {
+        background-color: rgb(96, 174, 247);
+        border: 3px solid gray;
+        color: black;
+    }
 
+    /* 300円と500円のデザイン */
+    .price_zentai {
+        justify-content: center;
+    }
 
-.area500 {
-    margin-top: 40px;
-}
+    .area500 {
+        margin-top: 40px;
+    }
 
-.price300Container,
-.price500Container {
-    margin-top: 20px;
-}
+    .price300Container,
+    .price500Container {
+        margin-top: 20px;
+        justify-content: flex-start;
+    }
 
-/* 300円と500円のデザイン */
-.priceLabel {
-    display: flex;
-    color: #333333;
-    font-size: 30px;
-}
+    .priceLabel {
+        display: flex;
+        color: #333333;
+        font-size: 30px;
+    }
 
-.priceLabel::before,
-.priceLabel::after {
-    width: 3px;
-    height: 40px;
-    background-color: #2589d0;
-    content: '';
-}
+    .priceLabel::before,
+    .priceLabel::after {
+        width: 3px;
+        height: 40px;
+        background-color: #2589d0;
+        content: '';
+    }
 
-.priceLabel::before {
-    transform: rotate(-35deg);
-    margin-right: 30px;
-}
+    .priceLabel::before {
+        transform: rotate(-35deg);
+        margin-right: 30px;
+    }
 
-.priceLabel::after {
-    transform: rotate(35deg);
-    margin-left: 30px;
-}
+    .priceLabel::after {
+        transform: rotate(35deg);
+        margin-left: 30px;
+    }
 
+    #orderBtn {
+        position: absolute;
+        top: 1600px;
+        right: 20%;
+        background-color: rgb(236, 212, 193);
+        color: black;
+        border: 3px solid black;
+        padding: 12px 20px;
+        font-size: 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 8px 8px 0px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
 
+    #orderBtn:hover {
+        background-color: rgb(243, 133, 7);
+        border: 3px solid black;
+        color: black;
+    }
 
-/* 
+    /* 
 @-webkit-keyframes sheen {
     0% {
         transform: skewY(-45deg) translateX(0);
@@ -389,117 +427,116 @@ body {
 
 
 
-.largeImage {
-    width: 80%;
-    height: auto;
-    margin: 20px auto;
-    display: block;
-    object-fit: contain;
-    z-index: 10;
-    /* 他の要素よりも前面に表示 */
-}
-
-/* 大きな画像に光るエフェクト */
-.shineEffect {
-    animation: shine 1s ease-in-out infinite;
-}
-
-@keyframes shine {
-    0% {
-        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
+    .largeImage {
+        width: 80%;
+        height: auto;
+        margin: 20px auto;
+        display: block;
+        object-fit: contain;
+        z-index: 10;
+        /* 他の要素よりも前面に表示 */
     }
 
-    50% {
-        box-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.7);
+    /* 大きな画像に光るエフェクト */
+    .shineEffect {
+        animation: shine 1s ease-in-out infinite;
     }
 
-    100% {
-        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
+    @keyframes shine {
+        0% {
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        50% {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.7);
+        }
+
+        100% {
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
+        }
     }
-}
 
 
 
 
-/* メッセージのスタイル */
-.message {
-    font-size: 24px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 5px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    transition: all 1s ease;
-    text-align: center;
-}
+    メッセージのスタイル */ .message {
+        font-size: 24px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        border-radius: 5px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+        transition: all 1s ease;
+        text-align: center;
+    }
 
-/*=============================================
+    /*=============================================
  * order.html
  *=============================================*/
 
-#app {
-    width: 96%;
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 20px;
-    padding: 28px;
-    line-height: 1.5;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    background-color: transparent;
-    box-shadow: 2px 2px 5px 0px rgba(200, 200, 200, 1);
-    font-family: "Times New Roman";
-}
+    #app {
+        width: 96%;
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 20px;
+        padding: 28px;
+        line-height: 1.5;
+        border: 1px solid #ffffff;
+        border-radius: 5px;
+        background-color: transparent;
+        box-shadow: 2px 2px 5px 0px rgba(200, 200, 200, 1);
+        font-family: "Times New Roman";
+    }
 
-#error {
-    margin: 5px 0 0 0;
-    color: #ff0000;
-    font-size: .84rem;
-    font-weight: bold;
-}
+    #error {
+        margin: 5px 0 0 0;
+        color: #ff0000;
+        font-size: .84rem;
+        font-weight: bold;
+    }
 
-table {
-    display: table;
-    width: 100%;
-    border-collapse: collapse;
+    table {
+        display: table;
+        width: 100%;
+        border-collapse: collapse;
 
-    tbody {
-        tr {
-            th {
-                width: 80px;
-                padding: 20px 10px;
-                text-align: left;
-                border-bottom: 2px solid #384878;
-            }
-
-            td {
-                width: calc(100% - 80px);
-                padding: 20px 10px;
-                border-bottom: 2px solid #cccccc;
-
-                input {
-                    padding: 5px;
-                    border: 0;
-                    border: 1px solid #cccccc;
+        tbody {
+            tr {
+                th {
+                    width: 80px;
+                    padding: 20px 10px;
+                    /* text-align: left; */
+                    border-bottom: 2px solid #384878;
                 }
 
-                button {
-                    padding: 3px 10px;
-                    color: #ffffff;
-                    background-color: #00c2bc;
-                    border: 0;
-                    box-shadow: none;
-                    cursor: pointer;
-                }
+                td {
+                    width: calc(100% - 80px);
+                    padding: 20px 10px;
+                    border-bottom: 2px solid #cccccc;
 
-                .zipcode {
-                    width: 75px;
+                    input {
+                        padding: 5px;
+                        border: 0;
+                        border: 1px solid #cccccc;
+                    }
+
+                    button {
+                        padding: 3px 10px;
+                        color: #ffffff;
+                        background-color: #00c2bc;
+                        border: 0;
+                        box-shadow: none;
+                        cursor: pointer;
+                    }
+
+                    .zipcode {
+                        width: 75px;
+                    }
                 }
             }
         }
     }
-}

@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault();  // ドロップを許可するために必要
         });
 
+        
         cell.addEventListener("drop", (e) => {
             e.preventDefault();
             const draggedItemId = e.dataTransfer.getData("text");
@@ -112,30 +113,30 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // 新しい重箱の画像を各セルに追加
-        cells.forEach(cell => {
-            const combinedImage = document.createElement("img");
-            combinedImage.src = combinedImageSrc;  // 合体した重箱画像
-            combinedImage.classList.add("combinedImage");
-            cell.appendChild(combinedImage);
+        // // 新しい重箱の画像を各セルに追加
+        // cells.forEach(cell => {
+        //     const combinedImage = document.createElement("img");
+        //     combinedImage.src = combinedImageSrc;  // 合体した重箱画像
+        //     combinedImage.classList.add("combinedImage");
+        //     cell.appendChild(combinedImage);
 
-            // 重箱画像を中心にアニメーションで表示
-            combinedImage.style.transform = "scale(0)";
-            combinedImage.style.transition = "transform 0.5s ease";
-            setTimeout(() => {
-                combinedImage.style.transform = "scale(1)";
-            }, 10);
-        });
+        //     // 重箱画像を中心にアニメーションで表示
+        //     combinedImage.style.transform = "scale(0)";
+        //     combinedImage.style.transition = "transform 0.5s ease";
+        //     setTimeout(() => {
+        //         combinedImage.style.transform = "scale(1)";
+        //     }, 10);
+        // });
 
-        // 重箱画像が完成したら、アニメーションを終わらせる
-        setTimeout(() => {
-            cells.forEach(cell => {
-                const combinedImage = cell.querySelector(".combinedImage");
-                if (combinedImage) {
-                    combinedImage.style.transition = "none";  // アニメーション終了後は変化しないようにする
-                }
-            });
-        }, 1500);
+        // // 重箱画像が完成したら、アニメーションを終わらせる
+        // setTimeout(() => {
+        //     cells.forEach(cell => {
+        //         const combinedImage = cell.querySelector(".combinedImage");
+        //         if (combinedImage) {
+        //             combinedImage.style.transition = "none";  // アニメーション終了後は変化しないようにする
+        //         }
+        //     });
+        // }, 1500);
     }
 
     // 削除ボタンの処理
@@ -153,16 +154,29 @@ window.addEventListener('DOMContentLoaded', () => {
     // コンテナを指定
     const section = document.querySelector('.cherry-blossom-container');
 
-    // 花びらを生成する関数
+    // 梅の花びらを生成する関数
     const createPetal = () => {
-        const petalEl = document.createElement('span');
-        petalEl.className = 'petal';
-        const minSize = 10;
-        const maxSize = 15;
-        const size = Math.random() * (maxSize + 1 - minSize) + minSize;
-        petalEl.style.width = `${size}px`;
+        const petalEl = document.createElement('span'); // 'span' 要素を新たに作成
+        petalEl.className = 'petal'; // 作成した要素に 'petal' クラスを設定
+
+        // 梅の花びらは桜よりも小さめ
+        const minSize = 8;
+        const maxSize = 12;
+        const size = Math.random() * (maxSize + 1 - minSize) + minSize; // ランダムなサイズを計算
+
+        petalEl.style.width = `${size}px`; // サイズを花びらの幅と高さに適用
         petalEl.style.height = `${size}px`;
+
+        // 梅の花びらの形を丸くする
+        petalEl.style.borderRadius = '50%';
+
+        // ランダムな位置を設定（画面幅内で）
         petalEl.style.left = Math.random() * innerWidth + 'px';
+
+        // 梅の花の色を設定（少し濃いピンクや赤）
+        petalEl.style.backgroundColor = `rgb(${Math.floor(Math.random() * 50) + 180}, ${Math.floor(Math.random() * 50) + 100}, ${Math.floor(Math.random() * 50) + 100})`;
+
+        // 'section' 要素に花びらを追加
         section.appendChild(petalEl);
 
         // 一定時間が経てば花びらを消す
