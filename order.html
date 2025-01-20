@@ -27,35 +27,103 @@
             <table>
                 <tbody>
                     <tr>
+                        <th>お名前</th>
+                        <td>
+                            <input type="text" id="name" name="name" placeholder="お名前を入力" required>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <th>郵便番号</th>
                         <td>
-                            <input id="input" class="zipcode" type="text" name="zipcode" value=""
-                                placeholder="例) 8120012">
-                            <button id="search" type="button">住所検索</button>
+                            <input type="text" id="zipcode" class="zipcode" placeholder="例) 8120012" maxlength="7"
+                                required>
+                            <button type="button" id="search" class="search-button">住所検索</button>
                             <p id="error"></p>
                         </td>
                     </tr>
 
                     <tr>
                         <th>都道府県</th>
-                        <td><input id="address1" type="text" name="address1" value=""></td>
+                        <td><input id="address1" type="text" name="address1" value="" readonly></td>
                     </tr>
 
                     <tr>
                         <th>市区町村</th>
-                        <td><input id="address2" type="text" name="address2" value=""></td>
+                        <td><input id="address2" type="text" name="address2" value="" readonly></td>
                     </tr>
 
                     <tr>
                         <th>町域・番地</th>
-                        <td><input id="address3" type="text" name="address3" value=""></td>
+                        <td><input id="address3" type="text" name="address3" value="" readonly></td>
                     </tr>
+
+                    <tr>
+                        <th>電話番号</th>
+                        <td>
+                            <input type="tel" id="phone" name="phone" placeholder="例) 090-1234-5678" required>
+                        </td>
+                    </tr>
+
                 </tbody>
-            </table>
+            </table><br>
         </form>
     </div>
-    <button class="tyumon_button">注文</button>
+    <button type="button" id="confirmButton" class="button">確認</button>
+    <script>
+        // 郵便番号から住所を取得する処理
+        document.getElementById('search').addEventListener('click', function () {
+            const zipcode = document.getElementById('zipcode').value.replace('-', ''); // ハイフンを取り除く
+            if (zipcode.length === 7) {
+                fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zipcode}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.results) {
+                            const result = data.results[0];
+                            const address1 = result.address1;  // 都道府県
+                            const address2 = result.address2;  // 市区町村
+                            const address3 = result.address3;  // 町域・番地
 
+                            // 各フィールドに住所を入力
+                            document.getElementById('address1').value = address1;
+                            document.getElementById('address2').value = address2;
+                            document.getElementById('address3').value = address3;
+                        } else {
+                            alert('住所が見つかりませんでした。');
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert('エラーが発生しました。');
+                    });
+            } else {
+                alert('郵便番号は7桁で入力してください。');
+            }
+        });
+
+        // 確認ボタンを押したとき
+        document.getElementById('confirmButton').addEventListener('click', function () {
+            const name = document.getElementById('name').value;
+            const zipcode = document.getElementById('zipcode').value;
+            const address = `${document.getElementById('address1').value}${document.getElementById('address2').value}${document.getElementById('address3').value}`;
+            const phone = document.getElementById('phone').value;
+
+            if (!name || !zipcode || !address || !phone) {
+                alert('すべての項目を入力してください。');
+                return;
+            }
+
+            // 確認画面に情報を表示
+            document.getElementById('confirmName').textContent = name;
+            document.getElementById('confirmZipcode').textContent = zipcode;
+            document.getElementById('confirmAddress').textContent = address;
+            document.getElementById('confirmPhone').textContent = phone;
+
+            // 注文画面を非表示にして、確認画面を表示
+            document.getElementById('orderForm').classList.add('hidden');
+            document.getElementById('confirmation').classList.remove('hidden');
+        });
+    </script>
 </body>
 
 </html>
