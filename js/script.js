@@ -267,114 +267,79 @@ window.addEventListener('DOMContentLoaded', () => {
     // 花びらを生成する間隔をミリ秒で指定
     setInterval(createPetal, 300);
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const dragItems = document.querySelectorAll(".dragItem");  // ドラッグ可能なアイテム
+    const dropCells = document.querySelectorAll(".dropCell");  // ドロップセル（重箱）
+    let totalPrice = 0;  // 合計金額を管理
 
+    // ドラッグが開始された時に、アイテムの金額を保存
+    dragItems.forEach(item => {
+        item.addEventListener("dragstart", (e) => {
+            e.dataTransfer.setData("text", item.id);
+        });
+    });
 
-// ---------------------------
+    // 各ドロップセルに対してドラッグオーバーとドロップの処理
+    dropCells.forEach(cell => {
+        cell.addEventListener("dragover", (e) => {
+            e.preventDefault();  // ドロップを許可するために必要
+        });
 
-// 開始時間
-let startTime;
-// 経過秒数用 タイマーID
-let timer;
-// カードめくり用 タイマーID(動作中はカードがめくれないように)
-let backTimer;
-// 1枚目かどうかのフラグ(1枚目: true 2枚目: false)
-let flgFirst = true;
-// 1枚目のカードを格納
-let cardFirst;
-// そろえた枚数(ペアができるたびに+1 10ペアで終了)
-let countUnit = 0;
+        cell.addEventListener("drop", (e) => {
+            e.preventDefault();
+            const draggedItemId = e.dataTransfer.getData("text");
+            const draggedItem = document.getElementById(draggedItemId);
+            const draggedPrice = parseInt(draggedItem.getAttribute("data-price"), 10);  // 金額を取得
 
-let img_arr = [
-    "luffy", "zoro", "sanji", "nami", "usopp",
-    "robin", "chopper", "franky", "brook", "luffy2"
-];
-let img_tag_arr = [];
-for (let i = 0; i < 10; i++) {
-    img_tag_arr.push("<img src='" + img_arr[i] + ".png'>")
-}
+            // 画像をドロップされたセルに追加
+            if (cell.querySelector(".droppedImage")) {
+                const existingImage = cell.querySelector(".droppedImage");
+                existingImage.src = draggedItem.querySelector("img").src;  // 入れ替え
+            } else {
+                const droppedImage = document.createElement("img");
+                droppedImage.src = draggedItem.querySelector("img").src;
+                droppedImage.classList.add("droppedImage");
+                cell.appendChild(droppedImage);
+            }
 
-window.onload = function () {
-    let arr = [];
-    for (let i = 0; i < 10; i++) {
-        arr.push(i);
-        arr.push(i);
-    }  //[0,0,1,1,2,2,...........8,8,9,9] 合計20の要素
+            // 合計金額を更新
+            totalPrice += draggedPrice;
+            document.getElementById("totalPrice").textContent = `現在の金額: ${totalPrice}円`;  // 金額を表示
 
-    shuffle(arr);// シャッフル [1,7,3,4,4,5......]
-    let game_board = document.getElementById('game_board');
+            // 9マスが同じ画像で埋まったかチェック
+            checkAndTransform(dropCells);
+        });
+    });
 
-    // div要素作成(カード)
-    for (i = 0; i < 20; i++) {
-        let div = document.createElement('div');
-        div.className = 'card back'; //カードの裏側を表示
-        div.number = arr[i]; //プロパティを設定
-        //console.log(Object.keys(div));
-        //console.log(Object.values(div));
-        div.onclick = turn;
-        game_board.appendChild(div);
-    }
-    startTime = new Date(); // 開始時刻を取得
-    startTimer(); // タイマー開始
-}
-//シャッフル用関数
-function shuffle(arr) {
-    let n = arr.length;
-    while (n) { //nが0になったら終了      ここで毎回-1
-        i = Math.floor(Math.random() * n--);
-        [arr[n], arr[i]] = [arr[i], arr[n]]
-    }
-    return arr;
-}
-// カードクリック時の処理
-function turn(e) {
-    let div = e.target; //クリックしたカード
-    // カードのタイマー処理が動作中は return
-    if (backTimer) return; //連続で押せないように
-    // 裏向きのカードをクリックした場合は画像を表示する
-    if (div.innerHTML == '') {
-        div.className = 'card'; //backというクラス名を取り除いた
-        div.innerHTML = img_tag_arr[div.number];
-    } else {
-        return // 数字が表示されているカードは return
-    }
-    if (flgFirst) { // 1枚目の処理 一枚目ならtrue
-        cardFirst = div;  //最初にクリックしたカード
-        flgFirst = false; //次は２枚目だから
-    } else { // ２枚目の処理
-        if (cardFirst.number == div.number) {
-            countUnit++; //揃ったペアの数
-            backTimer = setTimeout(function () {
-                div.className = 'card finish'; //0.5秒で透明
-                cardFirst.className = 'card finish';
-                backTimer = NaN;
-                if (countUnit == 10) { //すべてカードが揃ったら
-                    clearInterval(timer);  // timer終了
-                    //setInterval(showSecond, 1000)
-                }
-            }, 500)
-        } else {
-            backTimer = setTimeout(function () {
-                div.className = 'card back';
-                div.innerHTML = ''; // カードを裏側に戻す
-                cardFirst.className = 'card back';
-                cardFirst.innerHTML = '';
-                cardFirst = null;
-                backTimer = NaN;
-            }, 500);
+    // 同じ画像が9つ揃った時の処理（合体処理など）
+    function checkAndTransform(cells) {
+        const images = Array.from(cells).map(cell => {
+            return cell.querySelector(".droppedImage") ? cell.querySelector(".droppedImage").src : null;
+        });
+
+        const allSame = images.every(img => img === images[0] && img !== null);
+
+        if (allSame) {
+            alert("同じ画像が揃いました！ 金額をリセットします。");
+            resetTotalPrice();
         }
-        flgFirst = true;
     }
-}
-// タイマー開始
-function startTimer() {
-    timer = setInterval(showSecond, 1000);
-}
-// 秒数表示
-function showSecond() {
-    let nowTime = new Date();
-    let elapsedTime = Math.floor((nowTime - startTime) / 1000);
-    let str = '経過秒数: ' + elapsedTime + '秒';
-    let re = document.getElementById('result');
-    re.innerHTML = str;
-}
 
+    // 合計金額をリセットする関数
+    function resetTotalPrice() {
+        totalPrice = 0;
+        document.getElementById("totalPrice").textContent = `現在の金額: 0円`;  // 金額をリセット
+    }
+
+    // 削除ボタンの処理（削除時に金額を戻す）
+    const deleteBtn = document.getElementById("deleteBtn");
+    deleteBtn.addEventListener("click", () => {
+        const selectedImage = document.querySelector(".selected");
+        if (selectedImage) {
+            const deletedItemPrice = parseInt(selectedImage.getAttribute("data-price"), 10);
+            totalPrice -= deletedItemPrice;  // 削除したアイテムの金額を引く
+            selectedImage.remove();
+            document.getElementById("totalPrice").textContent = `現在の金額: ${totalPrice}円`;  // 金額を更新
+        }
+    });
+});

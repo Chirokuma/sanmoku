@@ -151,6 +151,10 @@ body {
     text-align: center;
 }
 
+/* .totalPrice {
+    font-size: 30px; 文字サイズおかしい
+} */
+
 .sakusei_button {
     font-family: "Noto Serif JP", serif;
     font-size: 30px;
@@ -657,4 +661,8 @@ img {
         transform: scale(1);
         box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
     }
+}
+
+.kanryo {
+    text-align: center;
 }
