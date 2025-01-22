@@ -203,12 +203,10 @@ body {
 
 #custom-page {
     background-image: url('images/haikei.jpg');
-
-    /* background-size: cover;
-    background-position: center; */
-    /* justify-content: center;
-    margin: 0;
-    padding: 0;*/
+    display: flex;
+    justify-content: center; /* 横方向で中央に配置 */
+    min-height: 100vh;       /* 画面全体の高さを使う */
+    margin: 0;               /* 余白を0に */
 }
 
 /* ドロップエリア（重箱） */
@@ -324,14 +322,14 @@ body {
 
 /* 削除ボタンのスタイル */
 #deleteBtn {
+    font-size: 25px;
+    color: black;
     position: absolute;
     top: 800px;
-    left: 20%;
+    right: -20%;
     background-color: rgb(199, 222, 243);
-    color: black;
     border: 3px solid black;
     padding: 12px 20px;
-    font-size: 25px;
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 0 8px 8px 0px rgba(0, 0, 0, 0.1);
@@ -360,9 +358,9 @@ body {
 }
 
 .priceLabel {
-    display: flex;
-    color: #333333;
     font-size: 30px;
+    color: #333333;
+    display: flex;
 }
 
 .priceLabel::before,
@@ -384,14 +382,14 @@ body {
 }
 
 #orderBtn {
+    font-size: 25px;
+    color: black;
+    background-color: rgb(236, 212, 193);
     position: absolute;
     top: 1600px;
-    right: 20%;
-    background-color: rgb(236, 212, 193);
-    color: black;
+    right: -20%;
     border: 3px solid black;
     padding: 12px 20px;
-    font-size: 25px;
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 0 8px 8px 0px rgba(0, 0, 0, 0.1);
@@ -399,33 +397,10 @@ body {
 }
 
 #orderBtn:hover {
+    color: black;
     background-color: rgb(243, 133, 7);
     border: 3px solid black;
-    color: black;
 }
-
-/* 
-@-webkit-keyframes sheen {
-    0% {
-        transform: skewY(-45deg) translateX(0);
-    }
-
-    100% {
-        transform: skewY(-45deg) translateX(12.5em);
-    }
-}
-
-@keyframes sheen {
-    0% {
-        transform: skewY(-45deg) translateX(0);
-    }
-
-    100% {
-        transform: skewY(-45deg) translateX(12.5em);
-    }
-} */
-
-
 
 .largeImage {
     width: 80%;
@@ -479,29 +454,28 @@ body {
  *=============================================*/
 
 #app {
+    font-family: "Times New Roman";
+    
     width: 96%;
     max-width: 500px;
     margin: 250px auto;
     padding: 20px;
-    padding: 28px;
     line-height: 1.5;
     border: 1px solid #ffffff;
     border-radius: 5px;
     background-color: rgb(244, 247, 245);
     box-shadow: 2px 2px 5px 0px rgba(200, 200, 200, 1);
-    font-family: "Times New Roman";
 }
 
 #error {
-    margin: 5px 0 0 0;
-    color: #ff0000;
     font-size: .84rem;
     font-weight: bold;
+    color: #ff0000;
+    margin: 5px 0 0 0;
 }
 
 table {
     font-family: 'Kiwi Maru', serif;
-
     display: table;
     width: 100%;
     border-collapse: collapse;
@@ -550,12 +524,12 @@ tr {
     font-size: 19px;
     color: black;
     background-color: rgb(236, 212, 193);
-    /* display: inline-block; */
+    display: grid;
     padding: 12px 24px;
     border: 1px solid #4f4f4f;
     border-radius: 4px;
     transition: all 0.2s ease-in;
-    /* position: relative; */
+    margin: auto;
     overflow: hidden;
     cursor: pointer;
     z-index: 1;
@@ -564,7 +538,6 @@ tr {
 #confirmButton:before {
     content: "";
     position: absolute;
-    left: 50%;
     transform: translateX(-50%) scaleY(1) scaleX(1.25);
     top: 100%;
     width: 140%;
@@ -579,7 +552,6 @@ tr {
 #confirmButton:after {
     content: "";
     position: absolute;
-    left: 55%;
     transform: translateX(-50%) scaleY(1) scaleX(1.45);
     top: 180%;
     width: 160%;
@@ -653,4 +625,33 @@ img {
 #result {
     font-size: 1.2em;
     font-weight: bold;
+}
+
+.selected {
+    border: 4px solid #FFD700;
+    /* ゴールドの枠 */
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+    /* さらに目立つ光の効果 */
+}
+
+.selected {
+    animation: pulse 1s infinite;
+    /* パルスアニメーション */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(255, 215, 0, 1);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    }
 }

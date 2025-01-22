@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const dragItems = document.querySelectorAll(".dragItem");
     const dropCells = document.querySelectorAll(".dropCell");
-    const combinedImageSrc = "path/to/your/combined-box-image.png";  // 合体後の重箱画像のパス
     let selectedImage = null;  // 現在選択されている画像
 
     // ドラッグが開始された時に、アイテムのIDを保存
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault();  // ドロップを許可するために必要
         });
 
-        
         cell.addEventListener("drop", (e) => {
             e.preventDefault();
             const draggedItemId = e.dataTransfer.getData("text");
@@ -63,26 +61,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const allSame = images.every(img => img === images[0] && img !== null);
 
         if (allSame) {
-            alert("？！！お惣菜たちが・・・キングサイズになってしまった！"); // ドラクエ風のセリフ
-            // 画像をぴかっと光らせる
+            alert("な なんと…おせちの料理たちが…！！ キングサイズになってしまった！！");
+
+            // 画像をぴかっと光らせてから合体させる
             glowAndEnlarge(cells);
         }
     }
 
-    // 画像が選択された時に大きくし、光らせる関数
-    function enlargeAndGlow(image) {
-        image.style.transform = "scale(1.2)";  // 画像を大きくする
-        image.style.transition = "transform 0.3s ease"; // スムーズに拡大
-        image.style.boxShadow = "0 0 15px 5px rgba(255, 255, 0, 0.8)";  // ぴかっと光らせる
-
-        // 光るエフェクトの解除（数秒後に元に戻す）
-        setTimeout(() => {
-            image.style.transform = "scale(1)"; // 元の大きさに戻す
-            image.style.boxShadow = "";  // 光を消す
-        }, 1000); // 1秒後に元に戻す
-    }
-
-    // 同じ画像が9つ揃った時に、全ての画像をぴかっと光らせるエフェクト
+    // 同じ画像が9つ揃った時に、全ての画像をぴかっと光らせ、巨大化する処理
     function glowAndEnlarge(cells) {
         // すべてのセルにドロップされた画像が同じかチェック
         const sameImage = cells[0].querySelector(".droppedImage").src;
@@ -91,21 +77,29 @@ document.addEventListener("DOMContentLoaded", function () {
         cells.forEach(cell => {
             const image = cell.querySelector(".droppedImage");
             if (image && image.src === sameImage) {
-                image.style.transform = "scale(1.2)";  // 画像を大きくする
+                image.style.transform = "scale(1.5)";  // 画像を大きくする
                 image.style.transition = "transform 0.3s ease"; // スムーズに拡大
                 image.style.boxShadow = "0 0 15px 5px rgba(255, 255, 0, 0.8)";  // ぴかっと光らせる
             }
         });
 
-        // 画像が合体して、重箱画像に変わるアニメーション
+        // 1秒後に画像を1つにまとめる
         setTimeout(() => {
-            combineImagesAndTransform(cells);  // 9つを合体させる
-        }, 1000); // 光るエフェクトが終わった後に合体させる
+            combineImagesAndTransform(cells);
+        }, 1000); // 光った後に合体させる
     }
 
-    // 9つの画像を合体させ、重箱画像に変える関数
+    // 9つの画像を1つの巨大な画像に変える関数
     function combineImagesAndTransform(cells) {
-        // すべてのセルをクリア
+        // 画像のサイズを設定
+        const cellWidth = cells[0].offsetWidth;  // セルの幅
+        const cellHeight = cells[0].offsetHeight;  // セルの高さ
+        const largeImageSize = 3 * cellWidth * 0.9;  // 9マス分の大きさに少し小さく調整（0.9倍）
+
+        // 各セルから画像を取り出し、削除する
+        const imageSrc = cells[0].querySelector(".droppedImage").src;
+
+        // 画像を削除（9つの画像を消去）
         cells.forEach(cell => {
             const image = cell.querySelector(".droppedImage");
             if (image) {
@@ -113,43 +107,128 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // // 新しい重箱の画像を各セルに追加
-        // cells.forEach(cell => {
-        //     const combinedImage = document.createElement("img");
-        //     combinedImage.src = combinedImageSrc;  // 合体した重箱画像
-        //     combinedImage.classList.add("combinedImage");
-        //     cell.appendChild(combinedImage);
+        // 合体した画像を作成
+        const combinedImage = document.createElement("img");
+        combinedImage.src = imageSrc;  // 最初の画像と同じ画像を使う
+        combinedImage.classList.add("combinedImage");
 
-        //     // 重箱画像を中心にアニメーションで表示
-        //     combinedImage.style.transform = "scale(0)";
-        //     combinedImage.style.transition = "transform 0.5s ease";
-        //     setTimeout(() => {
-        //         combinedImage.style.transform = "scale(1)";
-        //     }, 10);
-        // });
+        // セルの中央に巨大化した画像を追加
+        const centralCell = cells[4];  // セルの真ん中に追加
+        centralCell.appendChild(combinedImage);
 
-        // // 重箱画像が完成したら、アニメーションを終わらせる
-        // setTimeout(() => {
-        //     cells.forEach(cell => {
-        //         const combinedImage = cell.querySelector(".combinedImage");
-        //         if (combinedImage) {
-        //             combinedImage.style.transition = "none";  // アニメーション終了後は変化しないようにする
-        //         }
-        //     });
-        // }, 1500);
+        // 合体した画像を9マス分の大きさに拡大
+        combinedImage.style.width = `${largeImageSize}px`;  // 画像の幅を調整（9マス分のサイズより少し小さく）
+        combinedImage.style.height = `${largeImageSize}px`;  // 画像の高さを調整
+        combinedImage.style.position = "absolute";  // 画像の位置を絶対位置に設定
+        combinedImage.style.left = "50%";  // セルの50%の位置に配置
+        combinedImage.style.top = "48%";  // セルの50%の位置に配置
+        combinedImage.style.transform = "translate(-50%, -50%)";  // 中央に配置
+
+        combinedImage.style.transition = "width 0.5s ease, height 0.5s ease"; // スムーズに拡大
+
+        // 画像が完成したらアニメーションを終了
+        setTimeout(() => {
+            combinedImage.style.transition = "none";  // アニメーション終了後は変化しないようにする
+        }, 1500);
     }
 
     // 削除ボタンの処理
     const deleteBtn = document.getElementById("deleteBtn");
     deleteBtn.addEventListener("click", () => {
+        if (selectedImage) {
+            // 選択されている画像があれば、それを削除
+            selectedImage.remove();
+            selectedImage = null;  // 削除した後に選択を解除
+        }
+    });
+
+    // 画像を選択した時に枠をつける
+    droppedImage.addEventListener("click", () => {
+        // 既に選択されている画像があれば、枠を取り外す
+        if (selectedImage) {
+            selectedImage.classList.remove("selected");
+        }
+
+        // 新しく選択された画像に枠をつける
+        selectedImage = droppedImage;
+        selectedImage.classList.add("selected");
+        enlargeAndGlow(selectedImage);  // 画像を大きくし、光らせる
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        const dragItems = document.querySelectorAll(".dragItem");
+        const dropCells = document.querySelectorAll(".dropCell");
+        let draggedImage = null;  // ドラッグ中の画像を保持
+
+        // ドラッグが開始された時に、ドラッグ中のアイテムを保存
+        dragItems.forEach(item => {
+            item.addEventListener("dragstart", (e) => {
+                draggedImage = item.querySelector("img");  // ドラッグした画像を保持
+            });
+        });
+
+        // 各ドロップセルに対してドラッグオーバーとドロップの処理
         dropCells.forEach(cell => {
-            const image = cell.querySelector(".droppedImage");
-            if (image) {
-                image.remove();  // 画像を削除
-            }
+            // ドラッグオーバーを許可
+            cell.addEventListener("dragover", (e) => {
+                e.preventDefault();  // ドロップを許可するために必要
+            });
+
+            // ドロップ処理
+            cell.addEventListener("drop", (e) => {
+                e.preventDefault();
+
+                // ドロップされたセルに画像が既にある場合、その画像を保持
+                const currentImage = cell.querySelector(".droppedImage");
+
+                if (currentImage) {
+                    // 現在のセルに画像があれば、画像を入れ替える
+                    cell.querySelector(".droppedImage").remove();  // 現在の画像を削除
+                }
+
+                // ドラッグした画像を現在のセルに移動
+                const droppedImage = draggedImage.cloneNode();  // ドラッグ中の画像を複製
+                droppedImage.classList.add("droppedImage");
+                cell.appendChild(droppedImage);
+
+                // 画像を元のセルから削除
+                const originalCell = draggedImage.parentElement;
+                draggedImage.remove();
+
+                // 画像を元のセルに戻す
+                originalCell.appendChild(draggedImage);
+
+                // 画像を選択できるようにする
+                droppedImage.addEventListener("click", () => {
+                    if (selectedImage) {
+                        selectedImage.classList.remove("selected");
+                    }
+                    selectedImage = droppedImage;
+                    selectedImage.classList.add("selected");
+                    enlargeAndGlow(selectedImage); // 画像を大きくし、光らせる
+                });
+            });
         });
     });
+    // 巨大化した画像を選択できるようにする
+    const combinedImage = document.querySelector(".combinedImage");
+    if (combinedImage) {
+        combinedImage.addEventListener("click", () => {
+            // 既に選択されている画像があれば、枠を取り外す
+            if (selectedImage) {
+                selectedImage.classList.remove("selected");
+            }
+
+            // 現在クリックした巨大化した画像を選択
+            selectedImage = combinedImage;
+            selectedImage.classList.add("selected");
+        });
+    }
+
+
 });
+
+
+
 window.addEventListener('DOMContentLoaded', () => {
     // コンテナを指定
     const section = document.querySelector('.cherry-blossom-container');
@@ -298,3 +377,4 @@ function showSecond() {
     let re = document.getElementById('result');
     re.innerHTML = str;
 }
+
