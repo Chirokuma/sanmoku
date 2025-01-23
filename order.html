@@ -8,19 +8,18 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
 
-<header id="header">
-    <h1><a href="index.html">Customized Osechi</a></h1>
-    <div class="wrap">
-        <nav class="menu">
-            <a href="index.html">TOP</a>
-            <a href="customizing2.html">おせち作成</a>
-            <a href="order.html">注文画面</a>
-            <a href="omake.html">おまけ</a>
-        </nav>
-    </div>
-</header>
-
 <body id="order-page">
+    <header id="header">
+        <h1><a href="index.html">Customized Osechi</a></h1>
+        <div class="wrap">
+            <nav class="menu">
+                <a href="index.html">TOP</a>
+                <a href="customizing2.html">おせち作成</a>
+                <a href="order.html">注文画面</a>
+                <a href="omake.html">おまけ</a>
+            </nav>
+        </div>
+    </header>
     <div id="app">
         <form>
             <table>
@@ -37,7 +36,7 @@
                         <td>
                             <input type="text" id="zipcode" class="zipcode" placeholder="例）8120012" maxlength="7"
                                 required>
-                            <button type="button" id="search" class="search-button">住所検索</button>
+                            <button type="button" id="search" class="searchBtn">住所検索</button>
                             <p id="error"></p>
                         </td>
                     </tr>
@@ -68,9 +67,9 @@
             </table><br>
         </form>
     </div>
-    <a href="end.html"><button type="button" id="confirmButton">確認</button></a>
-    
-    
+    <a href="end.html"><button type="button" id="confirmBtn">確認</button></a>
+
+
     <script>
         // 郵便番号から住所を取得する処理
         document.getElementById('search').addEventListener('click', function () {
@@ -101,13 +100,7 @@
                 alert('郵便番号は7桁で入力してください。');
             }
         });
-
-
     </script>
-
-
-
-
 </body>
 
 </html>

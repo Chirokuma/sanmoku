@@ -61,65 +61,18 @@ h1 a:hover {
 }
 
 body {
-    font-family: 'Kiwi Maru', serif;
     font-size: 1rem;
-    overflow: hidden;
-    /* スクロールバーを表示させない */
-}
-
-/* 花びらが降るアニメーション */
-@keyframes animate-petal {
-    0% {
-        top: 0;
-        opacity: 0;
-        transform: rotate(0deg);
-    }
-
-    10% {
-        opacity: 1;
-    }
-
-    90% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        top: 100vh;
-        transform: rotate(3000deg);
-    }
-}
-
-/* 桜を表示するコンテナのスタイル */
-.cherry-blossom-container {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    /* コンテナからはみ出した要素を隠す */
-    overflow: hidden;
-}
-
-/* 桜の花びらのスタイル */
-.petal {
-    position: absolute;
-    /* 花びらの色 */
-    background-color: #ffc0cb;
-    border-radius: 150% 0 150% 0;
-    animation: animate-petal 10s linear;
-}
-
-.petal::after {
-    content: "";
-    position: absolute;
-    top: -14%;
-    left: -10%;
-    display: block;
-    width: 100%;
+    font-family: 'Kiwi Maru', serif;
     height: 100%;
-    background-color: #ffc0cb;
-    border-radius: 150% 0 150% 0;
-    transform: rotate(15deg);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    /* 横スクロールを無効化 */
+    overflow-y: auto;
+    /* 縦スクロールを必要に応じて有効に */
 }
+
+
 
 /*=============================================
  * index.html
@@ -155,7 +108,7 @@ body {
     font-size: 30px; 文字サイズおかしい
 } */
 
-.sakusei_button {
+.sakuseiBtn {
     font-family: "Noto Serif JP", serif;
     font-size: 30px;
     text-align: center;
@@ -173,9 +126,9 @@ body {
     margin: 10% auto;
 }
 
-.sakusei_button:before {
+.sakuseiBtn:before {
     content: "";
-    background-color: #ebd6ad;
+    background-color: #f1f1f0;
     height: 100%;
     width: 3em;
     display: block;
@@ -186,18 +139,32 @@ body {
     transition: none;
 }
 
-.sakusei_button:hover {
+.sakuseiBtn:hover {
     color: #fff;
     font-size: 2rem;
     transition: all 0.5s;
     transform: translate(0, 0.4em);
     box-shadow: 0 0 0 0 #fff;
-    /* animation: sheen 0.5s ease-in-out forwards; */
+    animation: sheen 0.5s ease-in-out forwards;
 }
 
-.sakusei_button:hover:before {
+.sakuseiBtn:hover:before {
     transform: skewX(-45deg) translateX(13.5em);
     transition: all 0.3s ease-in-out;
+}
+
+@keyframes shine {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.7);
+    }
+
+    100% {
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
+    }
 }
 
 
@@ -208,9 +175,12 @@ body {
 #custom-page {
     background-image: url('images/haikei.jpg');
     display: flex;
-    justify-content: center; /* 横方向で中央に配置 */
-    min-height: 100vh;       /* 画面全体の高さを使う */
-    margin: 0;               /* 余白を0に */
+    justify-content: center;
+    /* 横方向で中央に配置 */
+    min-height: 100vh;
+    /* 画面全体の高さを使う */
+    margin: 0;
+    /* 余白を0に */
 }
 
 /* ドロップエリア（重箱） */
@@ -225,6 +195,8 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 3px;
+    z-index: 1;
+    /* ヘッダーよりも後ろに配置 */
 }
 
 .customzentai {
@@ -421,37 +393,6 @@ body {
     animation: shine 1s ease-in-out infinite;
 }
 
-@keyframes shine {
-    0% {
-        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
-    }
-
-    50% {
-        box-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.7);
-    }
-
-    100% {
-        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
-    }
-}
-
-
-
-
-メッセージのスタイル */ .message {
-    font-size: 24px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 5px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    transition: all 1s ease;
-    text-align: center;
-}
 
 /*=============================================
  * order.html
@@ -479,18 +420,16 @@ body {
 
 table {
     font-family: 'Kiwi Maru', serif;
-        margin-bottom: 10px; /* テーブルと次の要素との間隔を狭くする */
-
-    display: table;
     width: 100%;
-    border-collapse: collapse;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 tr {
     th {
         width: 90px;
         padding: 20px 10px;
-        /* text-align: left; */
         border-bottom: 2px solid #384878;
     }
 
@@ -506,7 +445,7 @@ tr {
             border: 1px solid #cccccc;
         }
 
-        button {
+        #search {
             font-family: 'Kiwi Maru', serif;
             padding: 3px 10px;
             color: black;
@@ -524,14 +463,14 @@ tr {
 }
 
 /* 確認ボタン */
-#confirmButton {
+#confirmBtn {
     font-family: 'Kiwi Maru', serif;
     font-size: 19px;
     color: black;
     background-color: rgb(236, 212, 193);
-    display: grid;
-        margin: auto;
-    padding: 12px 24px;
+        display: block;
+    margin: 20px auto;
+    padding: 10px 40px;
     border: 1px solid #4f4f4f;
     border-radius: 4px;
     transition: all 0.2s ease-in;
@@ -540,7 +479,7 @@ tr {
     z-index: 1;
 }
 
-#confirmButton:before {
+#confirmBtn:before {
     content: "";
     position: absolute;
     transform: translateX(-50%) scaleY(1) scaleX(1.25);
@@ -554,7 +493,7 @@ tr {
     z-index: -1;
 }
 
-#confirmButton:after {
+#confirmBtn:after {
     content: "";
     position: absolute;
     transform: translateX(-50%) scaleY(1) scaleX(1.45);
@@ -564,74 +503,25 @@ tr {
     background-color: #39bda7;
     border-radius: 50%;
     display: block;
-    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    transition: all 0.5s 0.4s cubic-bezier(0.55, 0, 0.1, 1);
     z-index: -1;
 }
 
-#confirmButton:hover {
+#confirmBtn:hover {
     color: black;
     border: 3px solid black;
 }
 
-#confirmButton:hover:before {
+#confirmBtn:hover:before {
     top: -35%;
     background-color: #39bda7;
     transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
 
-#confirmButton:hover:after {
+#confirmBtn:hover:after {
     top: -45%;
     background-color: #39bda7;
     transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
-}
-
-
-
-/* ------------------------------- */
-
-#game_board {
-    margin-top: 200px;
-    width: 310px;
-    height: 340px;
-    overflow: hidden;
-}
-
-.card {
-    width: 60px;
-    height: 80px;
-    line-height: 80px;
-    border: 1px solid silver;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 26px;
-    font-weight: bold;
-    box-shadow: gray 2px 2px;
-    background: white;
-    float: left;
-    cursor: pointer;
-}
-
-img {
-    width: 60px;
-    height: 80px;
-}
-
-/* 裏の状態 */
-.back {
-    background-image: url('card.png');
-    background-size: 60px 80px;
-}
-
-/* 終了時 */
-.finish {
-    opacity: 0;
-    cursor: default;
-}
-
-/* 経過秒数 */
-#result {
-    font-size: 1.2em;
-    font-weight: bold;
 }
 
 .selected {
@@ -663,6 +553,65 @@ img {
     }
 }
 
+/*=============================================
+ * end.html
+ *=============================================*/
+
+/* 花びらが降るアニメーション */
+@keyframes animate-petal {
+    0% {
+        top: 0;
+        opacity: 0;
+        transform: rotate(0deg);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        top: 100vh;
+        transform: rotate(3000deg);
+    }
+}
+
+/* 花びらを表示するコンテナのスタイル */
+.cherry-blossom-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    /* コンテナからはみ出した要素を隠す */
+    overflow: hidden;
+}
+
+/* 梅の花のスタイル */
+.petal {
+    position: absolute;
+    background-color: #ffc0cb;
+    border-radius: 150% 0 150% 0;
+    animation: animate-petal 10s linear;
+}
+
+.petal::after {
+    content: "";
+    position: absolute;
+    top: -14%;
+    left: -10%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #ffc0cb;
+    border-radius: 150% 0 150% 0;
+    transform: rotate(15deg);
+}
+
 .kanryo {
+    font-size: 30px;
     text-align: center;
+    margin: 400px auto;
 }
