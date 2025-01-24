@@ -2,63 +2,6 @@
  * 共通
  *=============================================*/
 @charset "utf-8";
-@media screen and (max-width: 480px) {
-
-    header,
-    nav,
-    footer {
-        margin: 0 auto;
-        width: 95%;
-    }
-}
-
-/* 見え方をデバイスに合わせる */
-.responsive-image {
-    /* 親要素の幅に合わせて画像を縮小 */
-    max-width: 100%;
-    /* アスペクト比を保ちながら高さを自動調整 */
-    height: auto;
-}
-
-#header {
-    background-color: black;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-}
-
-h1 a {
-    color: white;
-    font-size: 3rem;
-    text-decoration: none;
-    justify-content: left;
-    padding-left: 30px;
-    transition: color 0.3s ease;
-    /* ホバー時の色変更をスムーズに */
-}
-
-h1 a:hover {
-    color: #FFD700;
-}
-
-.menu {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 5%;
-}
-
-.menu a {
-    color: white;
-    font-size: 1.2rem;
-    text-decoration: none;
-    margin-left: 20px;
-    transition: color 0.3s ease;
-}
-
-.menu a:hover {
-    color: #FFD700;
-}
 
 body {
     font-size: 1rem;
@@ -72,7 +15,84 @@ body {
     /* 縦スクロールを必要に応じて有効に */
 }
 
+h1 a {
+    color: white;
+    font-size: 5rem;
+    text-decoration: none;
+    justify-content: left;
+    padding-left: 30px;
+    transition: color 0.3s ease;
+    /* ホバー時の色変更をスムーズに */
+}
 
+h1 a:hover {
+    color: #FFD700;
+}
+
+table {
+    font-family: 'Kiwi Maru', serif;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+tr th {
+    width: 90px;
+    padding: 20px 10px;
+    border-bottom: 2px solid #384878;
+}
+
+td {
+    width: calc(100% - 80px);
+    padding: 20px 10px;
+    border-bottom: 2px solid #cccccc;
+}
+
+input {
+    width: 300px;
+    padding: 5px;
+    border: 0;
+    border: 1px solid #cccccc;
+}
+
+/* 見え方をデバイスに合わせる */
+.responsive-image {
+    /* 親要素の幅に合わせて画像を縮小 */
+    max-width: 100%;
+    /* アスペクト比を保ちながら高さを自動調整 */
+    height: auto;
+}
+
+* {
+    font-size: 20px;
+}
+
+#header {
+    background-color: black;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5%;
+}
+
+.menu a {
+    color: white;
+    font-size: 2rem;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+}
+
+.menu a:hover {
+    color: #FFD700;
+}
 
 /*=============================================
  * index.html
@@ -89,9 +109,12 @@ body {
     /* 幅も100% */
 }
 
+.wrapphoto {
+    width: 60%;
+    margin: 0 auto;
+}
 #topphoto {
-    width: 30%;
-    max-width: 60%;
+    width: 50%;
     height: auto;
     display: block;
     margin: 300px auto auto;
@@ -113,7 +136,7 @@ body {
     font-size: 30px;
     text-align: center;
     text-decoration: none;
-    max-width: %;
+    /* max-width: %; */
     padding: 1em 3em;
     color: #0a0a0a;
     background-color: #e6b422;
@@ -123,7 +146,7 @@ body {
     transition: all 0.2s ease-in-out;
     position: relative;
     overflow: hidden;
-    margin: 10% auto;
+    margin: 100px 500px;
 }
 
 .sakuseiBtn:before {
@@ -181,6 +204,7 @@ body {
     /* 画面全体の高さを使う */
     margin: 0;
     /* 余白を0に */
+
 }
 
 /* ドロップエリア（重箱） */
@@ -195,13 +219,14 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 3px;
-    z-index: 1;
-    /* ヘッダーよりも後ろに配置 */
+
 }
 
 .customzentai {
     position: absolute;
-    text-align: center
+    text-align: center;
+    z-index: ;
+    /* ヘッダーよりも後ろに配置 */
 }
 
 /* 重箱各マスのスタイル */
@@ -402,7 +427,7 @@ body {
     font-family: "Times New Roman";
     width: 96%;
     max-width: 500px;
-    margin: 250px auto;
+    margin: 400px auto 100px auto;
     padding: 40px 20px 40px 20px;
     line-height: 1.5;
     border: 1px solid #ffffff;
@@ -418,49 +443,21 @@ body {
     margin: 5px 0 0 0;
 }
 
-table {
+#search {
     font-family: 'Kiwi Maru', serif;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 3px 10px;
+    color: black;
+    /* background-color: #e2ccdd; */
+    background-color: rgb(199, 222, 243);
+    border-radius: 4px;
+    box-shadow: none;
+    cursor: pointer;
 }
 
-tr {
-    th {
-        width: 90px;
-        padding: 20px 10px;
-        border-bottom: 2px solid #384878;
-    }
-
-    td {
-        width: calc(100% - 80px);
-        padding: 20px 10px;
-        border-bottom: 2px solid #cccccc;
-
-        input {
-            width: 300px;
-            padding: 5px;
-            border: 0;
-            border: 1px solid #cccccc;
-        }
-
-        #search {
-            font-family: 'Kiwi Maru', serif;
-            padding: 3px 10px;
-            color: black;
-            /* background-color: #e2ccdd; */
-            background-color: rgb(199, 222, 243);
-            border-radius: 4px;
-            box-shadow: none;
-            cursor: pointer;
-        }
-
-        .zipcode {
-            width: 100px;
-        }
-    }
+.zipcode {
+    width: 100px;
 }
+
 
 /* 確認ボタン */
 #confirmBtn {
@@ -468,7 +465,7 @@ tr {
     font-size: 19px;
     color: black;
     background-color: rgb(236, 212, 193);
-        display: block;
+    display: block;
     margin: 20px auto;
     padding: 10px 40px;
     border: 1px solid #4f4f4f;
@@ -611,7 +608,17 @@ tr {
 }
 
 .kanryo {
-    font-size: 30px;
+    font-size: 40px;
     text-align: center;
-    margin: 400px auto;
+    margin: 700px auto;
+}
+
+@media screen and (max-width: 480px) {
+
+    header,
+    nav,
+    footer {
+        margin: 0 auto;
+        width: 95%;
+    }
 }
